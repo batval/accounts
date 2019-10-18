@@ -1,10 +1,18 @@
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import services.uiService.MenuService;
 import ui.Menu;
 import ui.MenuEntry;
 
 public class Main {
+
+
+
+    private static final Logger log = LogManager.getLogger(Main.class.getName());
+
     public static void main(String[] args) throws Exception {
 
+        log.info("Start App");
         MenuService menuService = new MenuService();
         Menu mainMenu = new Menu();
 
@@ -12,14 +20,12 @@ public class Main {
         mainMenu.addEntry(new MenuEntry("Add customer") {
             @Override
             public void run() {
-                System.out.println("Add customer");
                 menuService.addCustomerMenu();
             }
         });
         mainMenu.addEntry(new MenuEntry("Delete customer") {
             @Override
             public void run() {
-                System.out.println("Delete customer and all customer's account");
                 menuService.deleteCustomerMenu();
             }
         });
@@ -27,7 +33,6 @@ public class Main {
         mainMenu.addEntry(new MenuEntry("Show customer's accounts...") {
             @Override
             public void run() {
-                System.out.println("Show customer's account");
                 menuService.showAccountsCustomerMenu();
             }
         });
@@ -80,5 +85,6 @@ public class Main {
             }
         });
         mainMenu.run();
+        log.info("End work App");
     }
 }

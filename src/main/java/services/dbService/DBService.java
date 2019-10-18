@@ -1,5 +1,8 @@
 package services.dbService;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,13 +14,14 @@ import java.util.Properties;
 
 public class DBService {
 
+    private static final Logger log = LogManager.getLogger(DBService.class.getName());
     private final Connection connection;
 
     public DBService() throws FileNotFoundException {
         this.connection = getMysqlConnection();
     }
 
-    public static Connection getMysqlConnection() throws FileNotFoundException {
+    public static Connection getMysqlConnection()  {
         Properties properties = new Properties();
 
         try (InputStream input = new FileInputStream("config.properties")) {
@@ -36,15 +40,11 @@ public class DBService {
                     append("useSSL="+properties.getProperty("UseSSL")+"&").
                     append("serverTimezone="+properties.getProperty("ServerTimeZone"));
 
-            //        System.out.println("URL: " + url + "\n");
-
             Connection connection = DriverManager.getConnection(url.toString());
             return connection;
 
-        } catch (SQLException  e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (SQLException | IOException e) {
+            log.error(e.toString());
         }
         return null;
     }
@@ -56,16 +56,7 @@ public class DBService {
             System.out.println("Driver: " + connection.getMetaData().getDriverName());
             System.out.println("Autocommit: " + connection.getAutoCommit());
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e.toString());
         }
     }
-
-   /* public Customer getUser(long id) throws DBException {
-        try {
-            return (new UsersDAO(connection).get(id));
-        } catch (SQLException e) {
-            throw new DBException(e);
-        }
-    }
-*/
 }

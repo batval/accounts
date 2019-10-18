@@ -1,5 +1,7 @@
 package ui;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import services.dbService.DBException;
 import services.uiService.InputCheck;
 
@@ -10,8 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
+    private static final Logger log = LogManager.getLogger(Menu.class.getName());
     private static final String MENU_PATTERN = "%s - %s\n";
-    private List<MenuEntry> entries = new ArrayList<MenuEntry>();
+    private List<MenuEntry> entries = new ArrayList<>();
     private boolean isExit = false;
 
     public Menu() {
@@ -40,7 +43,7 @@ public class Menu {
                     System.out.println("Incorrect menu item!");
                 }}
             } catch (IOException | DBException e) {
-                e.printStackTrace();
+                log.error(e.toString());
             }
         }
     }
@@ -52,7 +55,7 @@ public class Menu {
     }
 
     private void printMenu() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         buffer.append("\nMenu:\n");
         for (int i = 0; i < entries.size(); i++) {
             MenuEntry entry = entries.get(i);

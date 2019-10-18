@@ -46,7 +46,7 @@ public class CustomersDAO {
     //Find all Customer
 
     public ArrayList<Customer> getAllObject() throws SQLException {
-        ArrayList<Customer>  customers = new ArrayList<Customer>();
+        ArrayList<Customer>  customers = new ArrayList<>();
         executor.execQuery("SELECT * FROM accounts.customers", resultSet -> {
             while (resultSet.next()) {
                 Customer  customer = new Customer(resultSet.getLong(1), resultSet.getString(2), resultSet.getString(3));
@@ -77,7 +77,6 @@ public class CustomersDAO {
         });
     }
 
-
     public boolean existCustomer(long id) throws SQLException{
         return   executor.execQuery("Select * from accounts.customer Where id='" +id+"'",resultSet -> {
             int size =0;
@@ -93,14 +92,6 @@ public class CustomersDAO {
         });
     }
 
-
-
-
-    /*
-    public void createTable() throws SQLException {
-        executor.execUpdate("create table if not exists customers (id bigint auto_increment, firstName varchar(256), lastName varchar(256), primary key (id))");
-    }
-*/
     public void dropTable() throws SQLException {
         executor.execUpdate("drop table customers");
     }

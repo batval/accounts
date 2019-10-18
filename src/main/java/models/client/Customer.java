@@ -6,11 +6,6 @@ public class Customer implements Comparable<Customer> {
     private final String firstName;
     private final String lastName;
 
-    /*  public Customer(String firstName,String lastName){
-          this.firstName = firstName;
-          this.lastName = lastName;
-      }
-  */
     public  Customer(long idCustomer, String firstName, String lastName){
         this.idCustomer = idCustomer;
         this.firstName = firstName;

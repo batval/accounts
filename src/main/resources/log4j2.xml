@@ -1,6 +1,6 @@
 <Configuration status="debug" strict="true"
                name="XMLConfigTest" packages="org.apache.logging.log4j.test">
-    <Filter type="ThresholdFilter" level="trace" />
+    <Filter type="ThresholdFilter" level="DEBUG" /> //OFF, FATAL, ERROR, WARN, INFO,DEBUG,TRACE,ALL
 
     <Appenders>
         <Console name="STDOUT">

@@ -7,11 +7,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import models.account.AccountPayment;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import services.dbService.*;
 import dao.accountDao.AccountPaymentDAO;
 
 public class AccountPaymentService implements AccountService {
 
+    private static final Logger log = LogManager.getLogger(AccountPaymentService.class.getName());
     private final Connection connection;
 
     public AccountPaymentService() throws FileNotFoundException {
@@ -25,6 +28,7 @@ public class AccountPaymentService implements AccountService {
             return(new AccountPaymentDAO(connection).existAccount(idCustomer));
         }
         catch (SQLException e){
+            log.error(e.toString());
             throw new DBException(e);
         }
     }
@@ -36,6 +40,7 @@ public class AccountPaymentService implements AccountService {
             return(new AccountPaymentDAO(connection).existAccountById(idAccountPayment));
         }
         catch (SQLException e){
+            log.error(e.toString());
             throw new DBException(e);
         }
     }
@@ -47,6 +52,7 @@ public class AccountPaymentService implements AccountService {
             return(new AccountPaymentDAO(connection).checkBlockAccount(idAccountPayment));
         }
         catch (SQLException e){
+            log.error(e.toString());
             throw new DBException(e);
         }
     }
@@ -58,6 +64,7 @@ public class AccountPaymentService implements AccountService {
             apDAO.addAccount( blocked,  balance,  idCustomer,  date);
         }
         catch (SQLException e){
+            log.error(e.toString());
             throw new DBException(e);
         }
     }
@@ -66,13 +73,18 @@ public class AccountPaymentService implements AccountService {
     //удалить счет
     @Override
     public  void  deleteAccount(long idAccount) throws DBException {
-        try {
-            new AccountPaymentDAO(connection).deleteAccountById(idAccount);
-        }
-        catch (SQLException e){
-            throw new DBException(e);
+        new AccountPaymentDAO(connection).deleteAccountById(idAccount);
+    }
+
+    //удалить все счета пользователя счет
+    @Override
+    public  void  deleteAllAccountCustomer(long idAccountCustomer) throws DBException {
+        if (existAccount(idAccountCustomer)) {
+            log.info("Delete accounts for customer with id: "+idAccountCustomer);
+            new AccountPaymentDAO(connection).deleteAccountByIdCustomer(idAccountCustomer);
         }
     }
+
 
     //блокировать-разблокировать счет
     @Override
@@ -81,6 +93,7 @@ public class AccountPaymentService implements AccountService {
             new AccountPaymentDAO(connection).setBlockedAccount(idAccount,blocked);
         }
         catch (SQLException e){
+            log.error(e.toString());
             throw new DBException(e);
         }
     }
@@ -92,6 +105,7 @@ public class AccountPaymentService implements AccountService {
             return(new  AccountPaymentDAO(connection).getAccountById(idAccount));
         }
         catch (SQLException e){
+            log.error(e.toString());
             throw new DBException(e);
         }
     }
@@ -102,6 +116,7 @@ public class AccountPaymentService implements AccountService {
             return(new  AccountPaymentDAO(connection).getAccountByIdCustomer(idCustomer));
         }
         catch (SQLException e){
+            log.error(e.toString());
             throw new DBException(e);
         }
     }
@@ -113,6 +128,7 @@ public class AccountPaymentService implements AccountService {
             return(new  AccountPaymentDAO(connection).getAccountBlockedOrUnBlocked(idCustomer,blocked));
         }
         catch (SQLException e){
+            log.error(e.toString());
             throw new DBException(e);
         }
 
@@ -125,6 +141,7 @@ public class AccountPaymentService implements AccountService {
             return(new  AccountPaymentDAO(connection).getAccountByIdCustomerSelectDate(idCustomer,dateStart,dateEnd));
         }
         catch (SQLException e){
+            log.error(e.toString());
             throw new DBException(e);
         }
 
@@ -137,6 +154,7 @@ public class AccountPaymentService implements AccountService {
             new  AccountPaymentDAO(connection).updateAccountBalance(idAccount, sum);
         }
         catch (SQLException e){
+            log.error(e.toString());
             throw new DBException(e);
         }
     }
@@ -155,6 +173,7 @@ public class AccountPaymentService implements AccountService {
             return negativeSum;
         }
         catch (DBException e){
+            log.error(e.toString());
             throw new DBException(e);
         }
 
@@ -174,6 +193,7 @@ public class AccountPaymentService implements AccountService {
             return positiveSum;
         }
         catch (DBException e){
+            log.error(e.toString());
             throw new DBException(e);
         }
 
@@ -182,11 +202,12 @@ public class AccountPaymentService implements AccountService {
     @Override
     public double getSum(long idCustomer) throws DBException{
         try {
-            double accountSum=0;
+            double accountSum=0.0;
             accountSum = getNegativeSum(idCustomer)+getPositiveSum(idCustomer);
             return accountSum;
         }
         catch (DBException e){
+            log.error(e.toString());
             throw new DBException(e);
         }
     }

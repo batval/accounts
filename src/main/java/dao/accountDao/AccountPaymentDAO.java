@@ -2,6 +2,8 @@ package dao.accountDao;
 
 
 import models.account.AccountPayment;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import services.dbService.executore.Executor;
 
 
@@ -12,6 +14,8 @@ import java.util.Date;
 
 
 public class AccountPaymentDAO extends AbstractJdbcDao <AccountPayment> {
+
+    private static final Logger log = LogManager.getLogger(AccountPaymentDAO.class.getName());
     private Executor executor;
 
     public AccountPaymentDAO(Connection connection) {
@@ -47,22 +51,29 @@ public class AccountPaymentDAO extends AbstractJdbcDao <AccountPayment> {
 
     //Search models.models.account by ID models.models.account
     @Override
-    public AccountPayment getAccountById(long id) throws SQLException {
-        return executor.execQuery(getSelectQuery()+"WHERE idAccountPayment='" + id + "'", resultSet -> {
-            resultSet.next();
-            return new AccountPayment(resultSet.getLong(1), resultSet.getByte(2), resultSet.getDouble(3),
-                    resultSet.getLong(4), resultSet.getDate(5));
-        });
+    public AccountPayment getAccountById(long id)  {
+       try {
+           return executor.execQuery(getSelectQuery() + "WHERE idAccountPayment='" + id + "'", resultSet -> {
+               resultSet.next();
+               return new AccountPayment(resultSet.getLong(1), resultSet.getByte(2), resultSet.getDouble(3),
+                       resultSet.getLong(4), resultSet.getDate(5));
+           });
+       }
+       catch (SQLException e)
+       {
+           log.error(e.toString());
+           return null;
+       }
     }
 
     //Delete models.models.account
     @Override
-    public void deleteAccountById(long id) throws SQLException {
+    public void deleteAccountById(long id)  {
         executor.execUpdate((getDeleteQuery() + id + "'"));
     }
 
     @Override
-    public void deleteAccountByIdCustomer(long idCustomer) throws SQLException {
+    public void deleteAccountByIdCustomer(long idCustomer)  {
         executor.execUpdate((getDeleteQueryCustomer()+idCustomer+"'"));
     }
 
@@ -85,7 +96,7 @@ public class AccountPaymentDAO extends AbstractJdbcDao <AccountPayment> {
     //Search all accounts
     @Override
     public ArrayList<AccountPayment> getAccountByIdCustomer(long idCustomer) throws SQLException {
-        ArrayList<AccountPayment>  accountPayments = new ArrayList<AccountPayment>();
+        ArrayList<AccountPayment>  accountPayments = new ArrayList<>();
         //   System.out.println(getSelectQuery()+ "WHERE idCustomer='" + idCustomer + "'");
         executor.execQuery(getSelectQuery()+ "WHERE idCustomer='" + idCustomer + "'", resultSet -> {
             while (resultSet.next()) {
@@ -101,7 +112,7 @@ public class AccountPaymentDAO extends AbstractJdbcDao <AccountPayment> {
     //search blocked accounts
     @Override
     public ArrayList<AccountPayment> getAccountBlockedOrUnBlocked(long idCustomer, byte blocked) throws SQLException {
-        ArrayList<AccountPayment>  accountPayments = new ArrayList<AccountPayment>();
+        ArrayList<AccountPayment>  accountPayments = new ArrayList<>();
 
         executor.execQuery(getSelectQuery()+" WHERE idCustomer='" + idCustomer + "'"+" AND blocked='"+blocked+"'", resultSet -> {
             while (resultSet.next()) {
@@ -117,7 +128,7 @@ public class AccountPaymentDAO extends AbstractJdbcDao <AccountPayment> {
     //Times lapse search
     @Override
     public ArrayList<AccountPayment> getAccountByIdCustomerSelectDate(long idCustomer, Date dateStart, Date dateEnd) throws SQLException {
-        ArrayList<AccountPayment>  accountPayments = new ArrayList<AccountPayment>();
+        ArrayList<AccountPayment>  accountPayments = new ArrayList<>();
         executor.execQuery(getSelectQuery()+ "WHERE idCustomer='" + idCustomer + "'"+" AND date>='"+dateStart+"'"+ " AND date<='"+dateEnd+"'", resultSet -> {
             while (resultSet.next()) {
                 AccountPayment  accountPayment = new AccountPayment(resultSet.getLong(1), resultSet.getByte(2), resultSet.getDouble(3),
@@ -132,7 +143,7 @@ public class AccountPaymentDAO extends AbstractJdbcDao <AccountPayment> {
     //Find more balance
     @Override
     public ArrayList<AccountPayment> getAccountMoreThan(long idCustomer, double sum) throws SQLException {
-        ArrayList<AccountPayment>  accountPayments = new ArrayList<AccountPayment>();
+        ArrayList<AccountPayment>  accountPayments = new ArrayList<>();
         executor.execQuery(getSelectQuery()+"WHERE idCustomer='" + idCustomer + "'"+" AND balance>='"+sum+"'", resultSet -> {
             while (resultSet.next()) {
                 AccountPayment  accountPayment = new AccountPayment(resultSet.getLong(1), resultSet.getByte(2), resultSet.getDouble(3),
