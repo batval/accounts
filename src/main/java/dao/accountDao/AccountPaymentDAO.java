@@ -16,6 +16,7 @@ import java.util.Date;
 public class AccountPaymentDAO extends AbstractJdbcDao <AccountPayment> {
 
     private static final Logger log = LogManager.getLogger(AccountPaymentDAO.class.getName());
+
     private Executor executor;
 
     public AccountPaymentDAO(Connection connection) {

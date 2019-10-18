@@ -60,6 +60,7 @@ public class AccountPaymentService implements AccountService {
     //добавить счет
     public void addAccountPayment(byte blocked, double balance, long idCustomer,  Date date)throws DBException{
         try {
+            log.info("Add account with parameters: blocked-"+ blocked+", balance-"+balance+", id customer-"+idCustomer+", Open date- "+date);
             AccountPaymentDAO apDAO = new AccountPaymentDAO(connection);
             apDAO.addAccount( blocked,  balance,  idCustomer,  date);
         }
@@ -90,7 +91,9 @@ public class AccountPaymentService implements AccountService {
     @Override
     public void setBlockedOrUnblocked(long idAccount,byte blocked) throws DBException{
         try {
+
             new AccountPaymentDAO(connection).setBlockedAccount(idAccount,blocked);
+
         }
         catch (SQLException e){
             log.error(e.toString());
@@ -100,14 +103,8 @@ public class AccountPaymentService implements AccountService {
 
     //найти счет по его номеру
     @Override
-    public AccountPayment getAccount(long idAccount) throws DBException{
-        try {
-            return(new  AccountPaymentDAO(connection).getAccountById(idAccount));
-        }
-        catch (SQLException e){
-            log.error(e.toString());
-            throw new DBException(e);
-        }
+    public AccountPayment getAccount(long idAccount) {
+                   return(new  AccountPaymentDAO(connection).getAccountById(idAccount));
     }
 
     //найти все счета клиента
