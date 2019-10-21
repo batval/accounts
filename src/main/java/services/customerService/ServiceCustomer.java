@@ -9,8 +9,11 @@ import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+
 import models.client.*;
 import dao.customerDao.*;
+
 public class ServiceCustomer {
 
     private static final Logger log = LogManager.getLogger(ServiceCustomer.class.getName());
@@ -108,7 +111,7 @@ public class ServiceCustomer {
         }
     }
 
-    public ArrayList<Customer> getAllCustomers() throws DBException{
+    public List<Customer> getAllCustomers() throws DBException{
         try {
             return(new  CustomersDAO(connection).getAllObject());
         }
