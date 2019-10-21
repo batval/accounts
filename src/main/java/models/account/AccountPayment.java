@@ -14,15 +14,30 @@ public class AccountPayment  extends BankAccount {
         this.date = date;
     }
 
+    @Override
+    public long getIdAccount(){
+        return super.idAccount;
+    }
 
-    public Date getDate (){
-        return this.date;
+    @Override
+    public byte getBlocked(){
+        return super.blocked;
     }
 
     @Override
     public double getBalance (){
         return super.balance;
     }
+
+    @Override
+    public long getIdCustomer(){
+        return super.idCustomer;
+    }
+
+    public Date getDate (){
+        return this.date;
+    }
+
 
 
     @Override

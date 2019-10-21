@@ -40,13 +40,13 @@ public abstract class AbstractJdbcDao<T> {
 
     public abstract  double getAccountBalanceById(long id) throws SQLException;
 
-    public abstract ArrayList<T> getAccountByIdCustomer(long idCustomer) throws SQLException;
+    public abstract List<T> getAccountByIdCustomer(long idCustomer) throws SQLException;
 
-    public abstract ArrayList<T> getAccountBlockedOrUnBlocked(long idCustomer, byte blocked) throws SQLException;
+    public abstract List<T> getAccountBlockedOrUnBlocked(long idCustomer, byte blocked) throws SQLException;
 
-    public abstract ArrayList<T> getAccountByIdCustomerSelectDate(long idCustomer, Date dateStart, Date dateEnd) throws SQLException;
+    public abstract List<T> getAccountByIdCustomerSelectDate(long idCustomer, Date dateStart, Date dateEnd) throws SQLException;
 
-    public abstract ArrayList<T> getAccountMoreThan(long idCustomer, double sum) throws SQLException;
+    public abstract List<T> getAccountMoreThan(long idCustomer, double sum) throws SQLException;
 
     public abstract boolean existAccount(long idCustomer) throws SQLException;
 

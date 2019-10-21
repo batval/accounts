@@ -3,8 +3,9 @@ package services.accountService;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import models.account.AccountPayment;
 import org.apache.logging.log4j.LogManager;
@@ -108,7 +109,7 @@ public class AccountPaymentService implements AccountService {
     }
 
     //найти все счета клиента
-    public ArrayList<AccountPayment> getAccounts(long idCustomer) throws DBException{
+    public List<AccountPayment> getAccounts(long idCustomer) throws DBException{
         try {
             return(new  AccountPaymentDAO(connection).getAccountByIdCustomer(idCustomer));
         }
@@ -120,7 +121,7 @@ public class AccountPaymentService implements AccountService {
 
     //найти блокированные/неблокированные счета
     @Override
-    public ArrayList<AccountPayment> getAccountsBlockedOrUnBlocked(long idCustomer, byte blocked) throws DBException {
+    public List<AccountPayment> getAccountsBlockedOrUnBlocked(long idCustomer, byte blocked) throws DBException {
         try {
             return(new  AccountPaymentDAO(connection).getAccountBlockedOrUnBlocked(idCustomer,blocked));
         }
@@ -133,7 +134,7 @@ public class AccountPaymentService implements AccountService {
 
     //Найти счета клиента открытые за период
     @Override
-    public ArrayList<AccountPayment> getAccountsSelectDate(long idCustomer,Date dateStart, Date dateEnd) throws DBException {
+    public List<AccountPayment> getAccountsSelectDate(long idCustomer,Date dateStart, Date dateEnd) throws DBException {
         try {
             return(new  AccountPaymentDAO(connection).getAccountByIdCustomerSelectDate(idCustomer,dateStart,dateEnd));
         }
@@ -160,8 +161,8 @@ public class AccountPaymentService implements AccountService {
     public double getNegativeSum(long idCustomer) throws DBException{
         try {
             double negativeSum=0;
-            ArrayList<AccountPayment> acCurrencies = getAccounts(idCustomer);
-            for (AccountPayment aP : acCurrencies)
+            List<AccountPayment> acPayments = getAccounts(idCustomer);
+            for (AccountPayment aP : acPayments)
             {
                 if (aP.getBalance()<0){
                     negativeSum=negativeSum+ aP.getBalance();
@@ -180,7 +181,7 @@ public class AccountPaymentService implements AccountService {
     public double getPositiveSum(long idCustomer) throws DBException{
         try {
             double positiveSum=0;
-            ArrayList<AccountPayment> acCurrencies = getAccounts(idCustomer);
+            List<AccountPayment> acCurrencies = getAccounts(idCustomer);
             for (AccountPayment aP : acCurrencies)
             {
                 if (aP.getBalance()>0){
@@ -209,6 +210,11 @@ public class AccountPaymentService implements AccountService {
         }
     }
 
+    @Override
+    public List<AccountPayment> sortAccounts(List accountPayments)  {
+       Collections.sort(accountPayments);
+       return accountPayments;
+    }
 
 }
 

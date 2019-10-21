@@ -17,7 +17,7 @@ public class DBService {
     private static final Logger log = LogManager.getLogger(DBService.class.getName());
     private final Connection connection;
 
-    public DBService() throws FileNotFoundException {
+    public DBService()  {
         this.connection = getMysqlConnection();
     }
 

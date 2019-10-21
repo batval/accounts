@@ -4,6 +4,7 @@ import services.dbService.DBException;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public interface AccountService  <T> {
 
@@ -21,11 +22,13 @@ public interface AccountService  <T> {
 
      T getAccount(long idAccount) throws DBException;
 
-     ArrayList<T> getAccounts(long idCustomer) throws DBException;
+     List<T> getAccounts(long idCustomer) throws DBException;
 
-     ArrayList<T> getAccountsBlockedOrUnBlocked(long idCustomer, byte blocked) throws DBException;
+     List<T> getAccountsBlockedOrUnBlocked(long idCustomer, byte blocked) throws DBException;
 
-     ArrayList<T> getAccountsSelectDate(long idCustomer,Date dateStart, Date dateEnd) throws DBException;
+     List<T> getAccountsSelectDate(long idCustomer, Date dateStart, Date dateEnd) throws DBException;
+
+     List<T> sortAccounts(List<T> accountPayments);
 
      void changeBalance (long idAccount, double sum) throws DBException;
 
