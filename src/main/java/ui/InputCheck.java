@@ -1,4 +1,4 @@
-package services.uiService;
+package ui;
 
 
 import org.apache.logging.log4j.LogManager;

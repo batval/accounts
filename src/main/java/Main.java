@@ -1,6 +1,6 @@
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import services.uiService.MenuService;
+import ui.MenuService;
 import ui.Menu;
 import ui.MenuEntry;
 

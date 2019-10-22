@@ -1,4 +1,4 @@
-package services.uiService;
+package ui;
 
 import models.account.AccountPayment;
 import models.client.Customer;

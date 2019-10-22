@@ -3,7 +3,6 @@ package ui;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import db.DBException;
-import services.uiService.InputCheck;
 
 import java.io.BufferedReader;
 import java.io.IOException;
