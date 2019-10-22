@@ -1,6 +1,6 @@
 package ui;
 
-import services.dbService.DBException;
+import db.DBException;
 
 import java.io.IOException;
 

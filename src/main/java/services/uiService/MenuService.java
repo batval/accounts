@@ -6,7 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import services.accountService.AccountPaymentService;
 import services.customerService.ServiceCustomer;
-import services.dbService.DBException;
+import db.DBException;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

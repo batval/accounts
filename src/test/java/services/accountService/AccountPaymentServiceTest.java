@@ -3,7 +3,7 @@ package services.accountService;
 import dao.accountDao.AccountPaymentDAO;
 import models.account.AccountPayment;
 import org.junit.Test;
-import services.dbService.DBService;
+import db.DBService;
 
 import java.sql.Connection;
 import java.sql.SQLException;

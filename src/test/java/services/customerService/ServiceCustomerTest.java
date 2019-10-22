@@ -3,7 +3,7 @@ package services.customerService;
 import dao.customerDao.CustomersDAO;
 import models.client.Customer;
 import org.junit.Test;
-import services.dbService.DBService;
+import db.DBService;
 
 import java.sql.Connection;
 import java.sql.SQLException;

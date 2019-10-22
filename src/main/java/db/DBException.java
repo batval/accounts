@@ -1,4 +1,4 @@
-package services.dbService;
+package db;
 
 
 public class DBException extends Exception {

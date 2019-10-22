@@ -2,7 +2,7 @@ package ui;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import services.dbService.DBException;
+import db.DBException;
 import services.uiService.InputCheck;
 
 import java.io.BufferedReader;

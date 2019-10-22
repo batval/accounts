@@ -5,8 +5,8 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import services.dbService.DBService;
-import services.dbService.executore.Executor;
+import db.DBService;
+import db.executore.Executor;
 
 import java.sql.SQLException;
 import java.text.DateFormat;

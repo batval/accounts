@@ -7,10 +7,13 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import db.DBException;
+import db.DBService;
+
 import models.account.AccountPayment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import services.dbService.*;
+
 import dao.accountDao.AccountPaymentDAO;
 
 public class AccountPaymentService implements AccountService {
@@ -24,7 +27,7 @@ public class AccountPaymentService implements AccountService {
 
     //есть ли счет у клиента
     @Override
-    public boolean existAccount(long idCustomer) throws DBException{
+    public boolean existAccount(long idCustomer) throws DBException {
         try {
             return(new AccountPaymentDAO(connection).existAccount(idCustomer));
         }

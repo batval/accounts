@@ -1,8 +1,7 @@
 package services.accountService;
 
-import services.dbService.DBException;
+import db.DBException;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

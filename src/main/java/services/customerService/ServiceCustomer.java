@@ -2,13 +2,12 @@ package services.customerService;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import services.dbService.DBException;
-import services.dbService.DBService;
+import db.DBException;
+import db.DBService;
 
 import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import models.client.*;

@@ -2,7 +2,7 @@ package dao.customerDao;
 
 import models.client.Customer;
 import org.jetbrains.annotations.Contract;
-import services.dbService.executore.Executor;
+import db.executore.Executor;
 
 import java.sql.Connection;
 import java.sql.SQLException;

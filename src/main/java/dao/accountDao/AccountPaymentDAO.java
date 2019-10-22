@@ -4,7 +4,7 @@ package dao.accountDao;
 import models.account.AccountPayment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import services.dbService.executore.Executor;
+import db.executore.Executor;
 
 
 import java.sql.Connection;
