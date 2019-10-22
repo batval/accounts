@@ -51,7 +51,7 @@ public class AccountPaymentDAO extends AbstractJdbcDao <AccountPayment> {
     }
 
 
-    //Search models.models.account by ID models.models.account
+    //Search account by ID
     @Override
     public AccountPayment getAccountById(long id)  {
        try {
