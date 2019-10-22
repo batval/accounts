@@ -7,6 +7,7 @@ import services.dbService.executore.Executor;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CustomersDAO {
 
@@ -47,8 +48,8 @@ public class CustomersDAO {
 
     //Find all Customer
 
-    public ArrayList<Customer> getAllObject() throws SQLException {
-        ArrayList<Customer>  customers = new ArrayList<>();
+    public List<Customer> getAllObject() throws SQLException {
+        List<Customer> customers = new ArrayList<Customer>();
         executor.execQuery("SELECT * FROM accounts.customers", resultSet -> {
             while (resultSet.next()) {
                 Customer  customer = new Customer(resultSet.getLong(1), resultSet.getString(2), resultSet.getString(3));
@@ -80,7 +81,7 @@ public class CustomersDAO {
     }
 
     public boolean existCustomer(long id) throws SQLException{
-        return   executor.execQuery("Select * from accounts.customer Where id='" +id+"'",resultSet -> {
+        return   executor.execQuery("Select * from accounts.customers Where id='" +id+"'",resultSet -> {
             int size =0;
             if (resultSet != null)
             {

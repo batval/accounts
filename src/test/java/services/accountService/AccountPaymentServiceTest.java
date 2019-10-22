@@ -3,7 +3,6 @@ package services.accountService;
 import dao.accountDao.AccountPaymentDAO;
 import models.account.AccountPayment;
 import org.junit.Test;
-import org.junit.*;
 import services.dbService.DBService;
 
 import java.sql.Connection;
