@@ -3,6 +3,7 @@ package services.accountService;
 import dao.accountDao.AccountPaymentDAO;
 import models.account.AccountPayment;
 import org.junit.Test;
+import org.junit.*;
 import services.dbService.DBService;
 
 import java.sql.Connection;
@@ -23,7 +24,6 @@ public class AccountPaymentServiceTest {
     public AccountPaymentServiceTest()  {
         this.connection = new DBService().getMysqlConnection();
     }
-
 
     @Test
     public void existAccountTrue() {

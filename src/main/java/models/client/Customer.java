@@ -24,7 +24,6 @@ public class Customer implements Comparable<Customer> {
         return this.lastName;
     }
 
-
     public  void   printInfo(){
         System.out.println(this.firstName +" "+this.lastName);
     }

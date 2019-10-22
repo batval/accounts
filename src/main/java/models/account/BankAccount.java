@@ -3,10 +3,10 @@ package models.account;
 import org.jetbrains.annotations.*;
 
 public abstract class BankAccount implements Comparable<BankAccount> {
-    long idAccount;
-    byte blocked;
-    double balance;
-    long idCustomer;
+    protected long idAccount;
+    protected byte blocked;
+    protected double balance;
+    protected  long idCustomer;
 
     public BankAccount(long idAccount,byte blocked,double balance, long idCustomer){
         this.idAccount = idAccount;
