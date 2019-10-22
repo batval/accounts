@@ -1,6 +1,7 @@
 package dao.customerDao;
 
 import models.client.Customer;
+import org.jetbrains.annotations.Contract;
 import services.dbService.executore.Executor;
 
 import java.sql.Connection;
@@ -11,6 +12,7 @@ public class CustomersDAO {
 
     private Executor executor;
 
+    @Contract(pure = true)
     public CustomersDAO(Connection connection) {
         this.executor = new Executor(connection);
     }
