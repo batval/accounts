@@ -46,8 +46,8 @@ public class AccountPaymentDAOTest {
             });
 
             assertEquals(idAccount,accountPayment.getIdAccount());
-            assertEquals((byte)0,accountPayment.getBlocked());
-            assertEquals(-800,accountPayment.getBalance(),0);
+            assertEquals((byte)1,accountPayment.getBlocked());
+            assertEquals(-300,accountPayment.getBalance(),0);
             assertEquals(9,accountPayment.getIdCustomer());
             assertEquals("2019-10-18",accountPayment.getDate().toString());
 
@@ -160,8 +160,8 @@ public class AccountPaymentDAOTest {
         assertEquals(9,accountPayments.get(1).getIdCustomer());
         assertEquals("2019-10-18",accountPayments.get(1).getDate().toString());
         assertEquals(9,accountPayments.get(2).getIdAccount());
-        assertEquals((byte)0,accountPayments.get(2).getBlocked());
-        assertEquals(-800,accountPayments.get(2).getBalance(),0);
+        assertEquals((byte)1,accountPayments.get(2).getBlocked());
+        assertEquals(-300,accountPayments.get(2).getBalance(),0);
         assertEquals(9,accountPayments.get(2).getIdCustomer());
         assertEquals("2019-10-18",accountPayments.get(2).getDate().toString());
 
