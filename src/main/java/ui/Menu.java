@@ -59,14 +59,15 @@ public class Menu {
 
             try {
                 String line = reader.readLine();
-                if (inputCheck.isInt(line)){
+                if (inputCheck.isInt(line)) {
                     int choice = Integer.parseInt(line);
-                    if ((choice>0)&(choice<=entries.size())){
+                    if ((choice > 0) & (choice <= entries.size())) {
                         MenuEntry entry = entries.get(choice - 1);
-                entry.run();}
-                else {
-                    System.out.println("Incorrect menu item!");
-                }}
+                        entry.run();
+                    } else {
+                        System.out.println("Incorrect menu item!");
+                    }
+                }
             } catch (IOException | DBException e) {
                 log.error(e.toString());
             }
@@ -87,7 +88,6 @@ public class Menu {
 
     /**
      * Display menu
-     *
      */
     private void printMenu() {
         StringBuilder buffer = new StringBuilder();

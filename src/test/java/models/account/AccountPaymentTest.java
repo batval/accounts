@@ -10,15 +10,15 @@ import static org.junit.Assert.*;
 
 public class AccountPaymentTest {
 
-private static AccountPayment accountPayment;
-private static AccountPayment accountPaymentCompare;
-private static AccountPayment accountPaymentCompareEquals;
+    private static AccountPayment accountPayment;
+    private static AccountPayment accountPaymentCompare;
+    private static AccountPayment accountPaymentCompareEquals;
 
     @BeforeClass
     public static void before() {
         Date today = new Date();
         java.sql.Date date = new java.sql.Date(today.getTime());
-        accountPayment = new AccountPayment(100,(byte)1,-1000,200,date);
+        accountPayment = new AccountPayment(100, (byte) 1, -1000, 200, date);
         accountPaymentCompare = new AccountPayment(111, (byte) 0, 2000, 300, date);
         accountPaymentCompareEquals = new AccountPayment(120, (byte) 0, 2000, 300, date);
     }
@@ -26,7 +26,7 @@ private static AccountPayment accountPaymentCompareEquals;
     @AfterClass
     public static void after() {
         accountPayment = null;
-        accountPaymentCompare=null;
+        accountPaymentCompare = null;
         accountPaymentCompareEquals = null;
     }
 
@@ -34,28 +34,28 @@ private static AccountPayment accountPaymentCompareEquals;
     public void getIdAccount() {
         long expected = 100;
         long actual = accountPayment.getIdAccount();
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void getBlocked() {
-        byte expected =1;
+        byte expected = 1;
         byte actual = accountPayment.getBlocked();
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void getBalance() {
         double expected = -1000;
         double actual = accountPayment.getBalance();
-        assertEquals(expected,actual,0);
+        assertEquals(expected, actual, 0);
     }
 
     @Test
     public void getIdCustomer() {
         long expected = 200;
         long actual = accountPayment.getIdCustomer();
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -64,16 +64,16 @@ private static AccountPayment accountPaymentCompareEquals;
         java.sql.Date date = new java.sql.Date(today.getTime());
         String expected = date.toString();
         String actual = accountPayment.getDate().toString();
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
     public void display() {
-        String expected =   "Information: \n"+ "Account ID is: "+ 100+"\nType is: Payment account \n"+
-                "Blocked: "+1+"\nBalance: "+ -1000.0 + "\nOpen date: "+"2019-10-22"+ "\n";
-         String actual =   "Information: \n"+ "Account ID is: "+ accountPayment.getIdAccount()+"\nType is: Payment account \n"+
-                "Blocked: "+accountPayment.getBlocked()+"\nBalance: "+ accountPayment.getBalance() + "\nOpen date: "+accountPayment.getDate().toString()+ "\n";
-        assertEquals(expected,actual);
+        String expected = "Information: \n" + "Account ID is: " + 100 + "\nType is: Payment account \n" +
+                "Blocked: " + 1 + "\nBalance: " + -1000.0 + "\nOpen date: " + "2019-10-22" + "\n";
+        String actual = "Information: \n" + "Account ID is: " + accountPayment.getIdAccount() + "\nType is: Payment account \n" +
+                "Blocked: " + accountPayment.getBlocked() + "\nBalance: " + accountPayment.getBalance() + "\nOpen date: " + "2019-10-22" + "\n";
+        assertEquals(expected, actual);
     }
 
     @Test

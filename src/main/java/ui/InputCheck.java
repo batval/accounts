@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
  * @author Baturo Valery
  * @version 1.0
  */
-public  class InputCheck {
+public class InputCheck {
 
     /**
      * Event Logger for class AccountPaymentDAO {@value}.
@@ -23,7 +23,7 @@ public  class InputCheck {
      * @param strNum user entered string
      * @return true if strNum is double and false otherwise
      * @throws NumberFormatException wrong format
-     * @throws NullPointerException null pointer
+     * @throws NullPointerException  null pointer
      */
     public static boolean isDouble(String strNum) {
         try {
@@ -42,11 +42,11 @@ public  class InputCheck {
      * @param strNum user entered string
      * @return true if strNum is int and false otherwise
      * @throws NumberFormatException wrong format
-     * @throws NullPointerException null pointer
+     * @throws NullPointerException  null pointer
      */
     public static boolean isInt(String strNum) {
         try {
-          int d = Integer.parseInt(strNum);
+            int d = Integer.parseInt(strNum);
         } catch (NumberFormatException | NullPointerException nfe) {
             System.out.println("Invalid data format");
             log.error(nfe);
@@ -61,7 +61,7 @@ public  class InputCheck {
      * @param strNum user entered string
      * @return true if strNum is boolean and false otherwise
      * @throws NumberFormatException wrong format
-     * @throws NullPointerException null pointer
+     * @throws NullPointerException  null pointer
      */
     public static boolean isBool(String strNum) {
         try {

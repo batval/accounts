@@ -26,19 +26,19 @@ public class DBServiceTest {
 
             url.
 
-                    append("jdbc:"+properties.getProperty("DBType")+"://").
-                    append(properties.getProperty("HostName")+":").
-                    append(properties.getProperty("Port")+"/").
-                    append(properties.getProperty("DataBase")+"?").
-                    append("user="+properties.getProperty("DbUser")+"&").
-                    append("password="+properties.getProperty("DbPassword")+"&").
-                    append("useSSL="+properties.getProperty("UseSSL")+"&").
-                    append("serverTimezone="+properties.getProperty("ServerTimeZone"));
+                    append("jdbc:" + properties.getProperty("DBType") + "://").
+                    append(properties.getProperty("HostName") + ":").
+                    append(properties.getProperty("Port") + "/").
+                    append(properties.getProperty("DataBase") + "?").
+                    append("user=" + properties.getProperty("DbUser") + "&").
+                    append("password=" + properties.getProperty("DbPassword") + "&").
+                    append("useSSL=" + properties.getProperty("UseSSL") + "&").
+                    append("serverTimezone=" + properties.getProperty("ServerTimeZone"));
 
             Connection connection = DriverManager.getConnection(url.toString());
-            String expected= "jdbc:mysql://localhost:3306/accounts?user=root&password=admin&useSSL=false&serverTimezone=UTC";
+            String expected = "jdbc:mysql://localhost:3306/accounts?user=root&password=admin&useSSL=false&serverTimezone=UTC";
             String actual = url.toString();
-            assertEquals(expected,actual);
+            assertEquals(expected, actual);
 
         } catch (SQLException | IOException e) {
             System.out.println(e.toString());

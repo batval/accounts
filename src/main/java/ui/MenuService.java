@@ -96,7 +96,6 @@ public class MenuService {
 
     /**
      * Add customer menu selection
-     *
      */
     public void addCustomerMenu() {
         try {
@@ -110,7 +109,6 @@ public class MenuService {
 
     /**
      * Delete customer menu selection
-     *
      */
     public void deleteCustomerMenu() {
         try {
@@ -125,7 +123,6 @@ public class MenuService {
 
     /**
      * Show accounts of customer menu selection
-     *
      */
     public void showAccountsCustomerMenu() {
 
@@ -150,7 +147,6 @@ public class MenuService {
 
     /**
      * Add account menu selection
-     *
      */
     public void addAccountMenu() {
         Customer customer = readCustomerObject();
@@ -181,7 +177,6 @@ public class MenuService {
 
     /**
      * Delete account menu selection
-     *
      */
     public void deleteAccountMenu() {
         Customer customer = readCustomerObject();
@@ -217,7 +212,6 @@ public class MenuService {
 
     /**
      * Block or unblock account menu selection
-     *
      */
     public void blockOrUnblockedAccountMenu() {
         Customer customer = readCustomerObject();
@@ -255,7 +249,6 @@ public class MenuService {
 
     /**
      * Change balance of account's menu selection
-     *
      */
     public void changeBalanceMenu() {
         Customer customer = readCustomerObject();
@@ -293,7 +286,6 @@ public class MenuService {
 
     /**
      * Show accounts statistics
-     *
      */
     public void showStat() {
         Customer customer = readCustomerObject();

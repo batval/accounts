@@ -114,7 +114,7 @@ public class CustomersDAO {
      * @return list of customers or null if there are no users in the database
      * @throws SQLException database error
      */
-    public List<Customer> getAllObject()  throws SQLException {
+    public List<Customer> getAllObject() throws SQLException {
         try {
             List<Customer> customers = new ArrayList<>();
             executor.execQuery("SELECT * FROM accounts.customers", resultSet -> {
@@ -137,7 +137,7 @@ public class CustomersDAO {
      * @param firstName customer First Name
      * @param lastName  customer Last Name
      */
-    public void insertObject(String firstName, String lastName)  {
+    public void insertObject(String firstName, String lastName) {
         executor.execUpdate("insert into accounts.customers (firstName,lastName) values ('" + firstName + "'," + "'" + lastName + "')");
     }
 
@@ -149,19 +149,19 @@ public class CustomersDAO {
      * @return true if customer exist and false otherwise
      * @throws SQLException database error
      */
-    public boolean existCustomer(String firstName, String lastName)  throws SQLException  {
-        try{
-        return executor.execQuery("Select * from accounts.customers Where firstName='" + firstName + "' AND " + "lastName='" + lastName + "'", resultSet -> {
-            int size = 0;
-            if (resultSet != null) {
-                resultSet.last();
-                size = resultSet.getRow();
-            }
+    public boolean existCustomer(String firstName, String lastName) throws SQLException {
+        try {
+            return executor.execQuery("Select * from accounts.customers Where firstName='" + firstName + "' AND " + "lastName='" + lastName + "'", resultSet -> {
+                int size = 0;
+                if (resultSet != null) {
+                    resultSet.last();
+                    size = resultSet.getRow();
+                }
 
-            if (size != 0) return true;
-            else
-                return false;
-        });
+                if (size != 0) return true;
+                else
+                    return false;
+            });
         } catch (SQLException e) {
             log.error(e.toString());
             return false;
@@ -176,18 +176,18 @@ public class CustomersDAO {
      * @throws SQLException database error
      */
     public boolean existCustomer(long id) throws SQLException {
-        try{
-        return executor.execQuery("Select * from accounts.customers Where id='" + id + "'", resultSet -> {
-            int size = 0;
-            if (resultSet != null) {
-                resultSet.last();
-                size = resultSet.getRow();
-            }
+        try {
+            return executor.execQuery("Select * from accounts.customers Where id='" + id + "'", resultSet -> {
+                int size = 0;
+                if (resultSet != null) {
+                    resultSet.last();
+                    size = resultSet.getRow();
+                }
 
-            if (size != 0) return true;
-            else
-                return false;
-        });
+                if (size != 0) return true;
+                else
+                    return false;
+            });
         } catch (SQLException e) {
             log.error(e.toString());
             return false;

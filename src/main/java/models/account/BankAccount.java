@@ -32,10 +32,10 @@ public abstract class BankAccount implements Comparable<BankAccount> {
     /**
      * Account constructor.
      *
-     * @param idAccount   account number.
-     * @param blocked     account blocked or unblocked.
-     * @param balance     account amount.
-     * @param idCustomer  account owner.
+     * @param idAccount  account number.
+     * @param blocked    account blocked or unblocked.
+     * @param balance    account amount.
+     * @param idCustomer account owner.
      */
     BankAccount(long idAccount, byte blocked, double balance, long idCustomer) {
         this.idAccount = idAccount;

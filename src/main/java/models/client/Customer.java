@@ -26,11 +26,11 @@ public class Customer implements Comparable<Customer> {
     /**
      * Customer constructor.
      *
-     * @param idCustomer  - customer number.
-     * @param firstName    -customer first name.
-     * @param lastName    - customer last name.
+     * @param idCustomer - customer number.
+     * @param firstName  -customer first name.
+     * @param lastName   - customer last name.
      */
-    public  Customer(long idCustomer, String firstName, String lastName){
+    public Customer(long idCustomer, String firstName, String lastName) {
         this.idCustomer = idCustomer;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -41,7 +41,7 @@ public class Customer implements Comparable<Customer> {
      *
      * @return number customer's
      */
-    public long getIdCustomer(){
+    public long getIdCustomer() {
         return this.idCustomer;
     }
 
@@ -50,24 +50,24 @@ public class Customer implements Comparable<Customer> {
      *
      * @return fist name customer's
      */
-    public String getFirstName (){
+    public String getFirstName() {
         return this.firstName;
     }
+
     /**
      * Returns last name customer's
      *
      * @return last name customer's
      */
-    public String getLastName () {
+    public String getLastName() {
         return this.lastName;
     }
 
     /**
      * Display customer name
-     *
      */
-    public  void   printInfo(){
-        System.out.println(this.firstName +" "+this.lastName);
+    public void printInfo() {
+        System.out.println(this.firstName + " " + this.lastName);
     }
 
     /**
@@ -78,6 +78,6 @@ public class Customer implements Comparable<Customer> {
      */
     @Override
     public int compareTo(Customer o) {
-        return ((this.lastName+this.firstName).compareTo(o.getLastName()+o.getFirstName()));
+        return ((this.lastName + this.firstName).compareTo(o.getLastName() + o.getFirstName()));
     }
 }

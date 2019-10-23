@@ -7,7 +7,6 @@ import ui.MenuEntry;
 public class Main {
 
 
-
     private static final Logger log = LogManager.getLogger(Main.class.getName());
 
     public static void main(String[] args) throws Exception {
@@ -45,15 +44,15 @@ public class Main {
                 Menu menuAccounts = new Menu();
                 menuAccounts.addEntry(new MenuEntry("Add account") {
                     @Override
-                   public void run()  {
-                   menuService.addAccountMenu();
+                    public void run() {
+                        menuService.addAccountMenu();
                     }
                 });
 
                 menuAccounts.addEntry(new MenuEntry("Delete account") {
                     @Override
                     public void run() {
-                    menuService.deleteAccountMenu();
+                        menuService.deleteAccountMenu();
                     }
                 });
 
@@ -61,7 +60,7 @@ public class Main {
                 menuAccounts.addEntry(new MenuEntry("Block or Unblocked account") {
                     @Override
                     public void run() {
-                       menuService.blockOrUnblockedAccountMenu();
+                        menuService.blockOrUnblockedAccountMenu();
 
                     }
                 });
@@ -70,16 +69,17 @@ public class Main {
                     @Override
                     public void run() {
                         menuService.changeBalanceMenu();
-                   }
+                    }
                 });
 
                 menuAccounts.addEntry(new MenuEntry("Account statistics") {
                     @Override
                     public void run() {
                         {
-                           menuService.showStat();
+                            menuService.showStat();
 
-                    }}
+                        }
+                    }
                 });
                 menuAccounts.run();
             }
