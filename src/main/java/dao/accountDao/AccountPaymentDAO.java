@@ -14,6 +14,12 @@ import java.util.Date;
 import java.util.List;
 
 
+/**
+ * Class for working with accounts (table account_payment) in the database
+ *
+ * @author Baturo Valery
+ * @version 1.0
+ */
 public class AccountPaymentDAO extends AbstractJdbcDao<AccountPayment> {
 
     /**
@@ -121,7 +127,7 @@ public class AccountPaymentDAO extends AbstractJdbcDao<AccountPayment> {
     }
 
     /**
-     * Remove an account from database by id
+     * Remove all accounts from database by id customer
      *
      * @param idCustomer customer number
      */
@@ -131,7 +137,7 @@ public class AccountPaymentDAO extends AbstractJdbcDao<AccountPayment> {
     }
 
     /**
-     * Block ro unblock an account from database by id
+     * Block or unblock an account from database by id
      *
      * @param id      account number
      * @param blocked 0 or 1. 0 - unblocked account, 1 - blocked account

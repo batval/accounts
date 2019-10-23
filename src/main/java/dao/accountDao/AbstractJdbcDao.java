@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.*;
 
 /**
- * Abstract class for working with a database
+ * Abstract class for working with accounts in the database
  *
  * @author Baturo Valery
  * @version 1.0

@@ -16,16 +16,42 @@ import org.apache.logging.log4j.Logger;
 
 import dao.accountDao.AccountPaymentDAO;
 
+/**
+ * Class describes the behavior of the account payment service
+ * implements AccountService
+ *
+ * @author Baturo Valery
+ * @version 1.0
+ */
+
 public class AccountPaymentService implements AccountService {
 
+    /**
+     * Event Logger for class AccountPaymentService {@value}.
+     */
     private static final Logger log = LogManager.getLogger(AccountPaymentService.class.getName());
+
+    /**
+     * Connection to database.
+     */
     private final Connection connection;
 
+    /**
+     * Connection initialization
+     *
+     * @throws FileNotFoundException database error
+     */
     public AccountPaymentService() throws FileNotFoundException {
         this.connection = new DBService().getMysqlConnection();
     }
 
-    //есть ли счет у клиента
+    /**
+     * Check if the client has accounts
+     *
+     * @param idCustomer customer number
+     * @return true if account exist and false otherwise
+     * @throws DBException database error
+     */
     @Override
     public boolean existAccount(long idCustomer) throws DBException {
         try {
@@ -36,7 +62,13 @@ public class AccountPaymentService implements AccountService {
         }
     }
 
-    //есть ли счет по id
+    /**
+     * Check if there is an account
+     *
+     * @param idAccountPayment account number
+     * @return true if account exist and false otherwise
+     * @throws DBException database error
+     */
     @Override
     public boolean existAccountById(long idAccountPayment) throws DBException {
         try {
@@ -47,7 +79,13 @@ public class AccountPaymentService implements AccountService {
         }
     }
 
-    //блокирован ли счет
+    /**
+     * Check Is account blocked
+     *
+     * @param idAccountPayment account number
+     * @return true if account blocked and false otherwise
+     * @throws DBException database error
+     */
     @Override
     public boolean checkBlockAccount(long idAccountPayment) throws DBException {
         try {
@@ -58,7 +96,15 @@ public class AccountPaymentService implements AccountService {
         }
     }
 
-    //добавить счет
+    /**
+     * Add a payment account to the database
+     *
+     * @param blocked    account blocked or not
+     * @param balance    amount account
+     * @param idCustomer customer number
+     * @param date       account opening date
+     * @throws DBException error with database
+     */
     public void addAccountPayment(byte blocked, double balance, long idCustomer, Date date) throws DBException {
         try {
             log.info("Add account with parameters: blocked-" + blocked + ", balance-" + balance + ", id customer-" + idCustomer + ", Open date- " + date);
@@ -71,13 +117,21 @@ public class AccountPaymentService implements AccountService {
     }
 
 
-    //удалить счет
+    /**
+     * Remove an account from database by id
+     *
+     * @param idAccount account number
+     */
     @Override
     public void deleteAccount(long idAccount) throws DBException {
         new AccountPaymentDAO(connection).deleteAccountById(idAccount);
     }
 
-    //удалить все счета пользователя счет
+    /**
+     * Remove all accounts from database by id customer
+     *
+     * @param idAccountCustomer customer number
+     */
     @Override
     public void deleteAllAccountCustomer(long idAccountCustomer) throws DBException {
         if (existAccount(idAccountCustomer)) {
@@ -86,8 +140,13 @@ public class AccountPaymentService implements AccountService {
         }
     }
 
-
-    //блокировать-разблокировать счет
+    /**
+     * Block or unblock an account from database by id
+     *
+     * @param idAccount account number
+     * @param blocked   0 or 1. 0 - unblocked account, 1 - blocked account
+     * @throws DBException database error
+     */
     @Override
     public void setBlockedOrUnblocked(long idAccount, byte blocked) throws DBException {
         try {
@@ -100,13 +159,24 @@ public class AccountPaymentService implements AccountService {
         }
     }
 
-    //найти счет по его номеру
+    /**
+     * Returns an account from database by id
+     *
+     * @param idAccount account number
+     * @return account with the specified id or null if not found
+     */
     @Override
     public AccountPayment getAccount(long idAccount) {
         return (new AccountPaymentDAO(connection).getAccountById(idAccount));
     }
 
-    //найти все счета клиента
+    /**
+     * Get all customer accounts by his id
+     *
+     * @param idCustomer customer number
+     * @return list of accounts customer
+     * @throws DBException database error
+     */
     public List<AccountPayment> getAccounts(long idCustomer) throws DBException {
         try {
             return (new AccountPaymentDAO(connection).getAccountByIdCustomer(idCustomer));
@@ -116,7 +186,14 @@ public class AccountPaymentService implements AccountService {
         }
     }
 
-    //найти блокированные/неблокированные счета
+    /**
+     * Get all block or unblock customer accounts by his id
+     *
+     * @param idCustomer customer number
+     * @param blocked    0 or 1. 0 - unblocked account, 1 - blocked account
+     * @return list of accounts customer
+     * @throws DBException database error
+     */
     @Override
     public List<AccountPayment> getAccountsBlockedOrUnBlocked(long idCustomer, byte blocked) throws DBException {
         try {
@@ -128,7 +205,15 @@ public class AccountPaymentService implements AccountService {
 
     }
 
-    //Найти счета клиента открытые за период
+    /**
+     * Get all customer accounts by his id for the period
+     *
+     * @param idCustomer customer number
+     * @param dateStart  beginning of period
+     * @param dateEnd    end of period
+     * @return list of accounts customer
+     * @throws DBException database error
+     */
     @Override
     public List<AccountPayment> getAccountsSelectDate(long idCustomer, Date dateStart, Date dateEnd) throws DBException {
         try {
@@ -140,7 +225,13 @@ public class AccountPaymentService implements AccountService {
 
     }
 
-    //изменить баланс
+    /**
+     * Change account amount
+     *
+     * @param idAccount account number
+     * @param sum       amount
+     * @throws DBException error with database
+     */
     @Override
     public void changeBalance(long idAccount, double sum) throws DBException {
         try {
@@ -151,6 +242,13 @@ public class AccountPaymentService implements AccountService {
         }
     }
 
+    /**
+     * Calculation of the amount for all accounts with a negative balance
+     *
+     * @param idCustomer customer number
+     * @return negative account amount
+     * @throws DBException error with database
+     */
     @Override
     public double getNegativeSum(long idCustomer) throws DBException {
         try {
@@ -169,6 +267,13 @@ public class AccountPaymentService implements AccountService {
 
     }
 
+    /**
+     * Calculation of the amount for all accounts with a positive balance
+     *
+     * @param idCustomer customer number
+     * @return positive account amount
+     * @throws DBException error with database
+     */
     @Override
     public double getPositiveSum(long idCustomer) throws DBException {
         try {
@@ -187,6 +292,13 @@ public class AccountPaymentService implements AccountService {
 
     }
 
+    /**
+     * Calculation of the amount for all accounts
+     *
+     * @param idCustomer customer number
+     * @return account amount
+     * @throws DBException error with database
+     */
     @Override
     public double getSum(long idCustomer) throws DBException {
         try {
@@ -199,6 +311,12 @@ public class AccountPaymentService implements AccountService {
         }
     }
 
+    /**
+     * Sort customer accounts
+     *
+     * @param accountPayments list of unsorted accounts
+     * @return list of sorted accounts
+     */
     @Override
     public List<AccountPayment> sortAccounts(List accountPayments) {
         Collections.sort(accountPayments);

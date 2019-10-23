@@ -10,12 +10,35 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Class for console menu
+ *
+ * @author Baturo Valery
+ * @version 1.0
+ */
 public class Menu {
-    private static final Logger log = LogManager.getLogger(Menu.class.getName());
+    /**
+     * Menu pattern (format menu) {@value #MENU_PATTERN}.
+     */
     private static final String MENU_PATTERN = "%s - %s\n";
+    /**
+     * Event Logger for class Menu.
+     */
+    private static final Logger log = LogManager.getLogger(Menu.class.getName());
+    /**
+     * Menu list.
+     */
     private List<MenuEntry> entries = new ArrayList<>();
+    /**
+     * Exit flag.
+     */
     private boolean isExit = false;
 
+    /**
+     * Menu constructor.
+     * Automatically create an "Exit" menu item and add it to the end of the list
+     */
     public Menu() {
         entries.add(new MenuEntry("Exit") {
             @Override
@@ -25,6 +48,9 @@ public class Menu {
         });
     }
 
+    /**
+     * Start an infinite loop until the exit is pressed.
+     */
     public void run() {
         while (!isExit) {
             printMenu();
@@ -47,12 +73,22 @@ public class Menu {
         }
     }
 
+    /**
+     * Adding an item to the menu.
+     *
+     * @param entry - an item of menu.
+     * @return return menu.
+     */
     public Menu addEntry(MenuEntry entry) {
         int index = entries.size() - 1;
         entries.add(index, entry);
         return this;
     }
 
+    /**
+     * Display menu
+     *
+     */
     private void printMenu() {
         StringBuilder buffer = new StringBuilder();
         buffer.append("\nMenu:\n");
