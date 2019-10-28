@@ -107,4 +107,19 @@ public class AccountPayment extends BankAccount {
         return 0;
     }
 
+/**
+ * Indicates whether some other object is "equal to" this one.
+ *
+ * @param compareObject object Comparison
+ * @return true if objects are equal and false otherwise
+ */
+    @Override
+    public boolean equals(Object compareObject){
+        if (this == compareObject) return true;
+        if (compareObject == null) return false;
+        if (getClass() != compareObject.getClass()) return false;
+        AccountPayment object = (AccountPayment) compareObject;
+        return idAccount == object.idAccount && blocked==object.blocked && balance==object.balance&&
+                idCustomer==object.idCustomer;
+    }
 }

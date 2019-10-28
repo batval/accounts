@@ -18,11 +18,21 @@ public class CustomersDAOTest {
 
 
     private static Executor executor;
-    private Customer customer;
+    private static Customer customer;
+    private static List<Customer> customerList;
+    private  static final String firstName = "test1";
+    private static final String lastName = "test0";
 
     @BeforeClass
     public static void before() {
         executor = new Executor(DBService.getMysqlConnection());
+        customer = new Customer(1,"test1","test0");
+        Customer  customerList1 = new Customer(5,"petr","petrov");
+        Customer  customerList2 = new Customer(9,"val","bat");
+        customerList = new ArrayList<>();
+        customerList.add(customer);
+        customerList.add(customerList1);
+        customerList.add(customerList2);
     }
 
     @AfterClass
@@ -33,33 +43,25 @@ public class CustomersDAOTest {
     @Test
     public void getObjectById() throws SQLException {
         long id = 1;
-        customer = executor.execQuery("select * from accounts.customers where id='" + id + "'", result -> {
+       Customer customerBd = executor.execQuery("select * from accounts.customers where id='" + id + "'", result -> {
             result.next();
             return new Customer(result.getLong(1), result.getString(2), result.getString(3));
         });
-        assertEquals(1, customer.getIdCustomer());
-        assertEquals("test0", customer.getLastName());
-        assertEquals("test1", customer.getFirstName());
+        assertEquals(customer, customerBd);
     }
 
     @Test
     public void getObjectByName() throws SQLException {
-        String firstName = "test1";
-        String lastName = "test0";
-        customer = executor.execQuery("select * from accounts.customers where firstName='" + firstName + "' AND lastName='" + lastName + "'", result -> {
+       Customer customerBd = executor.execQuery("select * from accounts.customers where firstName='" + firstName + "' AND lastName='" + lastName + "'", result -> {
             result.next();
             return new Customer(result.getLong(1), result.getString(2), result.getString(3));
         });
-        assertEquals(1, customer.getIdCustomer());
-        assertEquals(lastName, customer.getLastName());
-        assertEquals(firstName, customer.getFirstName());
+        assertEquals(customer, customerBd);
     }
 
     @Test
     public void getID() throws SQLException {
         long expected = 1;
-        String firstName = "test1";
-        String lastName = "test0";
         long actual = executor.execQuery("select * from accounts.customers where firstName='" + firstName + "'" + " AND lastName='" + lastName + "'", result -> {
             result.next();
             return result.getLong(1);
@@ -102,17 +104,7 @@ public class CustomersDAOTest {
             }
             return customers;
         });
-        assertEquals(1, customers.get(0).getIdCustomer());
-        assertEquals("test0", customers.get(0).getLastName());
-        assertEquals("test1", customers.get(0).getFirstName());
-
-        assertEquals(5, customers.get(1).getIdCustomer());
-        assertEquals("petrov", customers.get(1).getLastName());
-        assertEquals("petr", customers.get(1).getFirstName());
-
-        assertEquals(9, customers.get(2).getIdCustomer());
-        assertEquals("bat", customers.get(2).getLastName());
-        assertEquals("val", customers.get(2).getFirstName());
+        assertEquals(customerList,customers);
     }
 
 
@@ -132,5 +124,4 @@ public class CustomersDAOTest {
         });
         assertTrue(actual);
     }
-
 }

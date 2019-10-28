@@ -10,12 +10,13 @@ public class CustomerTest {
 
     private static Customer customer;
     private static Customer compareCustomer;
+    private static Customer compareCustomerTrue;
 
     @BeforeClass
     public static void before() {
         customer = new Customer(1000, "testFirstName", "testLastName");
         compareCustomer = new Customer(1001, "compareFirstName", "compareLastName");
-
+        compareCustomerTrue = new Customer(1001, "compareFirstName", "compareLastName");
     }
 
     @AfterClass
@@ -58,5 +59,16 @@ public class CustomerTest {
         int actual = (customer.getLastName() + customer.getFirstName()).compareTo(compareCustomer.getLastName() + compareCustomer.getFirstName());
         assertTrue(expected < actual);
 
+    }
+
+
+    @Test
+    public void testEqualsFalse() {
+        assertFalse(customer.equals(compareCustomer));
+    }
+
+    @Test
+    public void testEqualsTrue() {
+        assertTrue(compareCustomer.equals(compareCustomerTrue));
     }
 }

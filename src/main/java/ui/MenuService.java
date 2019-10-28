@@ -45,7 +45,6 @@ public class MenuService {
      */
     private InputCheck inputCheck = new InputCheck();
 
-
     public MenuService() throws FileNotFoundException {
     }
 

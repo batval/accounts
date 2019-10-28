@@ -13,6 +13,8 @@ public class AccountPaymentTest {
     private static AccountPayment accountPayment;
     private static AccountPayment accountPaymentCompare;
     private static AccountPayment accountPaymentCompareEquals;
+    private static AccountPayment accountPaymentCompareEqualsTrue;
+
 
     @BeforeClass
     public static void before() {
@@ -21,6 +23,7 @@ public class AccountPaymentTest {
         accountPayment = new AccountPayment(100, (byte) 1, -1000, 200, date);
         accountPaymentCompare = new AccountPayment(111, (byte) 0, 2000, 300, date);
         accountPaymentCompareEquals = new AccountPayment(120, (byte) 0, 2000, 300, date);
+        accountPaymentCompareEqualsTrue = new AccountPayment(120, (byte) 0, 2000, 300, date);
     }
 
     @AfterClass
@@ -28,6 +31,7 @@ public class AccountPaymentTest {
         accountPayment = null;
         accountPaymentCompare = null;
         accountPaymentCompareEquals = null;
+        accountPaymentCompareEqualsTrue=null;
     }
 
     @Test
@@ -92,5 +96,15 @@ public class AccountPaymentTest {
     public void testLessThan() {
         int result = accountPayment.compareTo(accountPaymentCompare);
         assertTrue("expected to be less than", result <= -1);
+    }
+
+    @Test
+    public void testEqualsFalse() {
+        assertFalse(accountPaymentCompare.equals(accountPaymentCompareEqualsTrue));
+    }
+
+    @Test
+    public void testEqualsTrue() {
+        assertTrue(accountPaymentCompareEquals.equals(accountPaymentCompareEqualsTrue));
     }
 }

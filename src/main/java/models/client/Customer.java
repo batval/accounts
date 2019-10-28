@@ -80,4 +80,19 @@ public class Customer implements Comparable<Customer> {
     public int compareTo(Customer o) {
         return ((this.lastName + this.firstName).compareTo(o.getLastName() + o.getFirstName()));
     }
+
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param compareObject object Comparison
+     * @return true if objects are equal and false otherwise
+     */
+    @Override
+    public boolean equals(Object compareObject){
+        if (this == compareObject) return true;
+        if (compareObject == null) return false;
+        if (getClass() != compareObject.getClass()) return false;
+        Customer object = (Customer) compareObject;
+        return idCustomer == object.idCustomer && firstName.equals(object.firstName) && lastName.equals(object.lastName);
+    }
 }
